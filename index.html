@@ -4,487 +4,300 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ryan Uota — Game Production &amp; Live Operations</title>
+<meta name="description" content="Ryan Uota — game production and live operations leader. Credits include Lost Ark, Call of Duty: Mobile, Harry Potter: Hogwarts Mystery, and WWE Champions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#EDEAE2;
-    --paper-raised:#F5F3ED;
-    --ink:#1C1B19;
-    --ink-soft:#5A5347;
-    --rule:#C9C2B4;
-    --accent-live:#C1442D;
-    --accent-data:#1F6F5C;
-    --chip-bg:#E3DED2;
-    --max:920px;
+    --page:#FBFAF8;
+    --ink:#16181C;
+    --ink-soft:#5C6069;
+    --rule:#DAD8D2;
+    --rule-strong:#B4B1A9;
+    --accent:#6E2B2B;
+    --max:860px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:16px;
-    line-height:1.55;
+    margin:0; background:var(--page); color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:15.5px; line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3,.display{
-    font-family:'Space Grotesk', sans-serif;
-    letter-spacing:-0.01em;
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  /* masthead */
+  .masthead{padding:80px 0 0;}
+  .masthead h1{
+    font-family:'Newsreader',Georgia,serif;
+    font-weight:500;
+    font-size:clamp(3rem,9vw,5.2rem);
+    line-height:0.95;
+    letter-spacing:-0.02em;
     margin:0;
   }
-  .nums{ font-variant-numeric: tabular-nums; }
-  a{ color:inherit; }
-  :focus-visible{
-    outline:2px solid var(--accent-live);
-    outline-offset:3px;
-  }
-
-  /* ---- top bar ---- */
-  .topbar{
-    position:sticky; top:0; z-index:20;
-    background:rgba(237,234,226,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--rule);
-  }
-  .topbar-inner{
-    max-width:var(--max); margin:0 auto;
-    padding:14px 24px;
-    display:flex; align-items:center; justify-content:space-between;
-    gap:16px;
-  }
-  .topbar-name{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:600; font-size:1rem;
-  }
-  .topbar-nav{
-    display:flex; gap:22px; font-size:0.9rem;
-  }
-  .topbar-nav a{ text-decoration:none; color:var(--ink-soft); }
-  .topbar-nav a:hover{ color:var(--ink); }
-  @media (max-width:640px){
-    .topbar-nav{ display:none; }
-  }
-
-  /* ---- hero ---- */
-  .hero{
-    max-width:var(--max); margin:0 auto;
-    padding:72px 24px 40px;
-    opacity:0; transform:translateY(14px);
-    animation:rise 0.7s ease-out 0.05s forwards;
-  }
-  @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
-  @media (prefers-reduced-motion:reduce){
-    .hero{ animation:none; opacity:1; transform:none; }
-    .live-dot{ animation:none !important; }
-  }
-  .kicker{
-    display:inline-flex; align-items:center; gap:8px;
-    font-size:0.85rem; color:var(--accent-live);
-    font-weight:600; margin-bottom:18px;
-  }
-  .live-dot{
-    width:7px; height:7px; border-radius:50%;
-    background:var(--accent-live);
-    animation:pulse 1.8s ease-in-out infinite;
-  }
-  @keyframes pulse{
-    0%,100%{ opacity:1; } 50%{ opacity:0.35; }
-  }
-  .hero h1{
-    font-size:clamp(2.4rem, 6vw, 3.6rem);
-    font-weight:700;
-    line-height:1.02;
-  }
-  .hero .role{
-    margin-top:10px;
-    font-size:clamp(1.05rem, 2.4vw, 1.3rem);
+  .masthead .subline{
+    font-family:'Newsreader',Georgia,serif;
+    font-size:clamp(1.15rem,2.6vw,1.5rem);
     color:var(--ink-soft);
-    font-weight:500;
+    margin-top:14px;
+    font-style:italic;
   }
-  .hero .pitch{
-    margin-top:22px;
-    max-width:62ch;
-    font-size:1.05rem;
-    color:var(--ink);
+  .rule-heavy{
+    border:0; border-top:2px solid var(--ink);
+    margin:34px 0 0;
   }
-  .hero .actions{
-    margin-top:28px;
-    display:flex; flex-wrap:wrap; gap:12px;
+  .meta-strip{
+    display:flex; flex-wrap:wrap; gap:28px;
+    padding:14px 0 0;
+    font-size:0.88rem; color:var(--ink-soft);
   }
-  .btn{
-    display:inline-block;
-    padding:10px 18px;
-    font-size:0.92rem;
-    font-weight:600;
-    text-decoration:none;
-    border:1.5px solid var(--ink);
-    border-radius:3px;
-  }
-  .btn.primary{ background:var(--ink); color:var(--paper); }
-  .btn.primary:hover{ background:transparent; color:var(--ink); }
-  .btn.ghost{ background:transparent; color:var(--ink); }
-  .btn.ghost:hover{ background:var(--ink); color:var(--paper); }
+  .meta-strip a{color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(110,43,43,0.3);}
+  .meta-strip a:hover{border-bottom-color:var(--accent);}
 
-  /* ---- stat rail ---- */
-  .statrail{
-    max-width:var(--max); margin:0 auto;
-    padding:0 24px 8px;
+  /* lede */
+  .lede{
+    padding:46px 0 12px;
+    font-family:'Newsreader',Georgia,serif;
+    font-size:1.32rem; line-height:1.62;
+    max-width:34em;
   }
-  .statrail-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    border-top:1px solid var(--rule);
-    border-bottom:1px solid var(--rule);
-  }
-  .stat{
-    padding:22px 18px;
-    border-left:1px solid var(--rule);
-  }
-  .stat:first-child{ border-left:none; }
-  .stat .num{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:700;
-    font-size:clamp(1.4rem, 3vw, 1.9rem);
-    color:var(--accent-data);
-  }
-  .stat .label{
-    margin-top:6px;
-    font-size:0.82rem;
-    color:var(--ink-soft);
-    line-height:1.35;
-  }
-  @media (max-width:720px){
-    .statrail-grid{ grid-template-columns:repeat(2,1fr); }
-    .stat:nth-child(3){ border-left:none; }
+  .lede .drop{
+    font-size:1.06em;
+    color:var(--accent);
   }
 
-  /* ---- sections ---- */
-  section{
-    max-width:var(--max); margin:0 auto;
-    padding:64px 24px;
+  /* figures */
+  .figures{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:0; margin:36px 0 0;
+    border-top:1px solid var(--rule-strong);
+    border-bottom:1px solid var(--rule-strong);
   }
-  section + section{ border-top:1px solid var(--rule); }
-  .section-head{
-    display:flex; align-items:baseline; justify-content:space-between;
-    margin-bottom:32px; gap:16px; flex-wrap:wrap;
+  .fig{padding:20px 16px 20px 0;}
+  .fig + .fig{padding-left:16px; border-left:1px solid var(--rule);}
+  .fig .n{
+    font-family:'Newsreader',Georgia,serif;
+    font-size:1.85rem; font-weight:500;
+    font-variant-numeric:tabular-nums;
   }
-  .section-head h2{
-    font-size:1.5rem; font-weight:600;
-  }
-  .section-head .index{
-    font-size:0.85rem; color:var(--ink-soft);
-  }
-  .overview p{
-    max-width:68ch; font-size:1.05rem;
-  }
-
-  /* ---- timeline ---- */
-  .entry{
-    display:grid;
-    grid-template-columns:140px 1fr;
-    gap:24px;
-    padding:26px 0;
-    border-top:1px solid var(--rule);
-  }
-  .entry:first-of-type{ border-top:none; }
-  .entry .when{
-    font-size:0.85rem;
-    color:var(--ink-soft);
-    padding-top:3px;
-  }
-  .entry .role-title{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:600;
-    font-size:1.15rem;
-  }
-  .entry .company{
-    color:var(--ink-soft);
-    font-size:0.98rem;
-    margin-top:2px;
-  }
-  .tag-row{
-    margin-top:10px;
-    display:flex; flex-wrap:wrap; gap:6px;
-  }
-  .tag{
-    background:var(--chip-bg);
-    border-radius:2px;
-    padding:3px 9px;
-    font-size:0.78rem;
-    color:var(--ink-soft);
-  }
-  .entry ul{
-    margin:14px 0 0; padding-left:18px;
-  }
-  .entry li{
-    margin-bottom:6px;
-    font-size:0.97rem;
-  }
-  .entry li::marker{ color:var(--accent-live); }
-  @media (max-width:640px){
-    .entry{ grid-template-columns:1fr; gap:8px; }
+  .fig .d{font-size:0.8rem; color:var(--ink-soft); line-height:1.4; margin-top:4px;}
+  @media(max-width:700px){
+    .figures{grid-template-columns:1fr 1fr;}
+    .fig:nth-child(3){padding-left:0; border-left:none;}
+    .fig:nth-child(3), .fig:nth-child(4){border-top:1px solid var(--rule);}
   }
 
-  /* ---- skills ---- */
-  .skill-groups{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:28px;
+  /* sections */
+  section{padding:58px 0;}
+  section + section{border-top:1px solid var(--rule);}
+  .sec-title{
+    font-family:'Newsreader',Georgia,serif;
+    font-size:1.05rem; font-weight:600;
+    margin:0 0 30px;
+    color:var(--accent);
   }
-  @media (max-width:720px){
-    .skill-groups{ grid-template-columns:1fr; }
-  }
-  .skill-group h3{
-    font-size:0.95rem; font-weight:600;
-    margin-bottom:12px;
-  }
-  .skill-group .tag-row{ margin-top:0; }
-  .tools-line{
-    margin-top:30px;
-    padding-top:24px;
-    border-top:1px solid var(--rule);
-    font-size:0.92rem;
-    color:var(--ink-soft);
-  }
-  .tools-line strong{ color:var(--ink); }
 
-  /* ---- education ---- */
-  .edu-row{
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
-    font-size:0.98rem;
+  /* roles */
+  .role{
+    display:grid; grid-template-columns:118px 1fr; gap:26px;
+    padding:24px 0;
   }
-  .edu-row .school{ color:var(--ink-soft); }
+  .role + .role{border-top:1px solid var(--rule);}
+  .role .dates{font-size:0.82rem; color:var(--ink-soft); padding-top:5px; font-variant-numeric:tabular-nums;}
+  .role h3{
+    font-family:'Newsreader',Georgia,serif;
+    font-size:1.28rem; font-weight:600; margin:0; letter-spacing:-0.01em;
+  }
+  .role .org{font-size:0.94rem; color:var(--ink-soft); margin-top:1px;}
+  .role .title-line{font-size:0.9rem; color:var(--ink-soft); margin-top:8px; font-style:italic;}
+  .role ul{margin:12px 0 0; padding-left:17px;}
+  .role li{margin-bottom:7px;}
+  .role li::marker{color:var(--rule-strong);}
+  @media(max-width:640px){
+    .role{grid-template-columns:1fr; gap:6px;}
+  }
 
-  /* ---- footer ---- */
-  footer{
-    max-width:var(--max); margin:0 auto;
-    padding:56px 24px 80px;
-    border-top:1px solid var(--rule);
+  /* capabilities */
+  .caps{display:grid; grid-template-columns:1fr 1fr; gap:34px;}
+  @media(max-width:640px){.caps{grid-template-columns:1fr;}}
+  .cap h4{
+    font-size:0.92rem; font-weight:600; margin:0 0 8px;
   }
-  footer h2{ font-size:1.5rem; font-weight:600; margin-bottom:14px; }
-  footer p{ max-width:52ch; color:var(--ink-soft); margin-bottom:26px; }
-  .contact-links{ display:flex; flex-wrap:wrap; gap:12px; }
-  .foot-note{
-    margin-top:46px; font-size:0.8rem; color:var(--ink-soft);
+  .cap p{margin:0; color:var(--ink-soft); font-size:0.94rem;}
+  .tools{
+    margin-top:32px; padding-top:22px; border-top:1px solid var(--rule);
+    font-size:0.92rem; color:var(--ink-soft);
   }
+  .tools b{color:var(--ink); font-weight:600;}
+
+  /* education + footer */
+  .edu{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  .edu .right{color:var(--ink-soft); font-variant-numeric:tabular-nums;}
+  footer{padding:56px 0 90px; border-top:2px solid var(--ink);}
+  footer h2{font-family:'Newsreader',Georgia,serif; font-size:1.9rem; font-weight:500; margin:0 0 12px;}
+  footer p{max-width:44em; color:var(--ink-soft); margin:0 0 22px;}
+  .contact a{
+    display:inline-block; margin-right:18px;
+    color:var(--accent); text-decoration:none;
+    border-bottom:1px solid rgba(110,43,43,0.35);
+    font-size:1.02rem;
+  }
+  .contact a:hover{border-bottom-color:var(--accent);}
+  .loc{margin-top:38px; font-size:0.82rem; color:var(--ink-soft);}
 </style>
 </head>
 <body>
+<div class="wrap">
 
-  <div class="topbar">
-    <div class="topbar-inner">
-      <div class="topbar-name">Ryan Uota</div>
-      <nav class="topbar-nav">
-        <a href="#overview">Overview</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </div>
-
-  <header class="hero">
-    <div class="kicker"><span class="live-dot"></span>Open to Senior Producer &amp; Product roles — mobile &amp; live service</div>
+  <header class="masthead">
     <h1>Ryan Uota</h1>
-    <div class="role">Game Production &amp; Live Operations Leader</div>
-    <p class="pitch">9+ years running cross-functional teams and live service strategy across mobile and PC titles — from a $3B lifetime-earnings mobile shooter to a launch that briefly became the second-most-played game in Steam history. I turn roadmaps into shipped, revenue-driving live ops.</p>
-    <div class="actions">
-      <a class="btn primary" href="mailto:ryan@uota.us">Email me</a>
-      <a class="btn ghost" href="https://www.linkedin.com/in/ryan-uota" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn ghost" href="tel:5302047018">530-204-7018</a>
+    <div class="subline">Game production and live operations, nine years in</div>
+    <hr class="rule-heavy">
+    <div class="meta-strip">
+      <span>Senior Producer, Zynga</span>
+      <span>Santa Rosa, California</span>
+      <a href="mailto:ryan@uota.us">ryan@uota.us</a>
+      <a href="https://www.linkedin.com/in/ryan-uota" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+
+    <p class="lede"><span class="drop">I take live games under real revenue pressure</span> and make their production pipelines faster, steadier, and more profitable. Nine years across mobile and PC — Amazon Games' Lost Ark, Activision's Call of Duty: Mobile, Jam City's Harry Potter: Hogwarts Mystery, Scopely's WWE Champions and Kingdom Maker.</p>
+
+    <div class="figures">
+      <div class="fig"><div class="n">$3B+</div><div class="d">Lifetime earnings, Call of Duty: Mobile</div></div>
+      <div class="fig"><div class="n">+55%</div><div class="d">XPromo revenue growth, FY25</div></div>
+      <div class="fig"><div class="n">$10M+</div><div class="d">Driven through WWE Champions live ops</div></div>
+      <div class="fig"><div class="n">1.3M</div><div class="d">Peak concurrents at Lost Ark launch</div></div>
     </div>
   </header>
 
-  <div class="statrail">
-    <div class="statrail-grid">
-      <div class="stat">
-        <div class="num nums">$3B+</div>
-        <div class="label">Lifetime earnings on Call of Duty: Mobile during my time on the live ops team</div>
-      </div>
-      <div class="stat">
-        <div class="num nums">+55%</div>
-        <div class="label">YoY XPromo revenue growth at Zynga — $2.9M → $4.5M in FY25</div>
-      </div>
-      <div class="stat">
-        <div class="num nums">$10M+</div>
-        <div class="label">Revenue driven through WWE Champions live ops at Scopely</div>
-      </div>
-      <div class="stat">
-        <div class="num nums">1.3M</div>
-        <div class="label">Peak concurrent players at Lost Ark's launch, which I supported at Amazon Games</div>
-      </div>
-    </div>
-  </div>
+  <section>
+    <h2 class="sec-title">Experience</h2>
 
-  <section id="overview" class="overview">
-    <div class="section-head">
-      <h2>Overview</h2>
-      <div class="index">01</div>
-    </div>
-    <p>I lead production and live operations for mobile and PC games — planning roadmaps, running release cadence, and aligning stakeholders from engineering to VP-level product leads. My credits include Amazon Games' Lost Ark, Activision's Call of Duty: Mobile, Jam City's Harry Potter: Hogwarts Mystery, and Scopely's Kingdom Maker and WWE Champions. Across every stop, the throughline is the same: take a live product under real revenue pressure and make its production pipeline faster, steadier, and more profitable.</p>
-  </section>
-
-  <section id="experience">
-    <div class="section-head">
-      <h2>Experience</h2>
-      <div class="index">02</div>
-    </div>
-
-    <div class="entry">
-      <div class="when">Jul 2025 — Present</div>
+    <div class="role">
+      <div class="dates">2025 — Present</div>
       <div>
-        <div class="role-title">Senior Producer</div>
-        <div class="company">Zynga</div>
-        <div class="tag-row"><span class="tag">XPromo — cross-promotion ad network</span></div>
+        <h3>Zynga</h3>
+        <div class="org">Senior Producer</div>
+        <div class="title-line">XPromo, Zynga's cross-promotion ad network</div>
         <ul>
-          <li>Rolled out AI-driven creative workflows, growing creative output 30% YoY and contributing to a 55% increase in XPromo revenue ($2.9M → $4.5M) in FY25.</li>
-          <li>Own the XPromo roadmap and planning calendar, aligning VP-level and international stakeholders across Zynga's mobile portfolio.</li>
+          <li>Rolled out AI-driven creative workflows that grew creative output 30% year over year and contributed to a 55% revenue increase, from $2.9M to $4.5M in FY25.</li>
+          <li>Own the roadmap and planning calendar across the network, aligning VP-level and international stakeholders on priorities and new initiatives.</li>
         </ul>
       </div>
     </div>
 
-    <div class="entry">
-      <div class="when">Sep — Dec 2024</div>
+    <div class="role">
+      <div class="dates">2024</div>
       <div>
-        <div class="role-title">Lead Publishing Producer</div>
-        <div class="company">Homa Games</div>
-        <div class="tag-row"><span class="tag">Publishing ecosystem</span></div>
+        <h3>Homa Games</h3>
+        <div class="org">Lead Publishing Producer</div>
+        <div class="title-line">Every title entering the publishing pipeline</div>
         <ul>
-          <li>Owned end-to-end onboarding for every new game joining the publishing pipeline, coordinating live ops, QA, design, and product.</li>
-          <li>Led the build and launch of a new webstore platform, moving purchases off Apple/Android, lifting digital engagement 15%+ and improving margin.</li>
+          <li>Owned end-to-end onboarding for new partner games, coordinating live ops, QA, design, and product regardless of studio size.</li>
+          <li>Led the build and launch of a webstore platform that moved purchases off Apple and Android, lifting digital engagement over 15% and improving margin.</li>
         </ul>
       </div>
     </div>
 
-    <div class="entry">
-      <div class="when">Jun 2023 — Sep 2024</div>
+    <div class="role">
+      <div class="dates">2023 — 2024</div>
       <div>
-        <div class="role-title">Producer</div>
-        <div class="company">Scopely</div>
-        <div class="tag-row"><span class="tag">Kingdom Maker</span><span class="tag">WWE Champions</span></div>
+        <h3>Scopely</h3>
+        <div class="org">Producer</div>
+        <div class="title-line">Kingdom Maker, WWE Champions</div>
         <ul>
-          <li>Owned the Live Ops team on WWE Champions, driving over $10M in revenue through new features and improved production pipelines.</li>
-          <li>Helped create Scopely's cross-game Webstore team, boosting revenue and margin by reducing platform fees across titles.</li>
+          <li>Ran the Live Ops team on WWE Champions, driving over $10M in revenue through new features and rebuilt production pipelines.</li>
+          <li>Helped stand up Scopely's Webstore team as a cross-game resource, growing retention 15% and lifting purchases over 20% alongside Analytics and UX.</li>
         </ul>
       </div>
     </div>
 
-    <div class="entry">
-      <div class="when">Jul 2022 — Jun 2023</div>
+    <div class="role">
+      <div class="dates">2022 — 2023</div>
       <div>
-        <div class="role-title">Live Ops Producer</div>
-        <div class="company">Activision</div>
-        <div class="tag-row"><span class="tag">Call of Duty: Mobile</span></div>
+        <h3>Activision</h3>
+        <div class="org">Live Ops Producer</div>
+        <div class="title-line">Call of Duty: Mobile</div>
         <ul>
-          <li>Shipped 3+ live updates a week during the game's peak revenue year ($470M in 2022), working closely with TiMi Studios' China-based dev team.</li>
-          <li>Implemented QA checklists and accountability processes that cut bugs in half during high-traffic live events.</li>
+          <li>Shipped three or more live updates a week during the title's peak revenue year, working across time zones with TiMi Studios in China.</li>
+          <li>Introduced QA checklists and accountability processes that cut bugs in half during high-traffic live events.</li>
         </ul>
       </div>
     </div>
 
-    <div class="entry">
-      <div class="when">Sep 2021 — Jul 2022</div>
+    <div class="role">
+      <div class="dates">2021 — 2022</div>
       <div>
-        <div class="role-title">Associate Producer</div>
-        <div class="company">Amazon Games</div>
-        <div class="tag-row"><span class="tag">Lost Ark</span></div>
+        <h3>Amazon Games</h3>
+        <div class="org">Associate Producer</div>
+        <div class="title-line">Lost Ark</div>
         <ul>
-          <li>Supported launch operations for a title that hit 1.3M peak concurrent players — briefly the second-most-played game in Steam history.</li>
-          <li>Built a tighter approval process between Amazon's publishing team and Smilegate's dev team across a major time-zone gap.</li>
+          <li>Supported one of the highest-profile MMO launches in recent Steam history, peaking at 1.3M concurrent players.</li>
+          <li>Built the approval and request process between Amazon's publishing team and Smilegate's developers, cutting turnaround time.</li>
         </ul>
       </div>
     </div>
 
-    <div class="entry">
-      <div class="when">Jan 2020 — Sep 2021</div>
+    <div class="role">
+      <div class="dates">2018 — 2021</div>
       <div>
-        <div class="role-title">Producer II</div>
-        <div class="company">Jam City</div>
-        <div class="tag-row"><span class="tag">Harry Potter: Hogwarts Mystery</span></div>
+        <h3>Jam City</h3>
+        <div class="org">Producer II, previously Release Manager</div>
+        <div class="title-line">Harry Potter: Hogwarts Mystery</div>
         <ul>
-          <li>Owned live operations for a $300M game, rebuilding the release pipeline and increasing event/release cadence from 1 to 3 per week.</li>
-          <li>Managed training and development for a team of 2 direct reports plus coordination across 18 additional team members.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="entry">
-      <div class="when">Nov 2018 — Jan 2020</div>
-      <div>
-        <div class="role-title">Release Manager</div>
-        <div class="company">Jam City</div>
-        <div class="tag-row"><span class="tag">Harry Potter: Hogwarts Mystery</span></div>
-        <ul>
-          <li>Owned vendor management end-to-end across multiple external partners and markets, including outsourcing and QA.</li>
-          <li>Managed a team of 8 Content Managers building game levels, owning their career development and growth planning.</li>
+          <li>Owned live operations for a $300M title, rebuilding the release pipeline and taking event cadence from one to three per week.</li>
+          <li>Managed a team of eight Content Managers, then two direct reports with coordination across eighteen more, owning development planning throughout.</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section id="skills">
-    <div class="section-head">
-      <h2>Core competencies</h2>
-      <div class="index">03</div>
-    </div>
-    <div class="skill-groups">
-      <div class="skill-group">
-        <h3>Project &amp; live ops management</h3>
-        <div class="tag-row">
-          <span class="tag">Agile / Scrum</span>
-          <span class="tag">Sprint planning</span>
-          <span class="tag">RAID logs</span>
-          <span class="tag">Release &amp; milestone management</span>
-          <span class="tag">Publishing &amp; cross-studio production</span>
-        </div>
+  <section>
+    <h2 class="sec-title">What I do</h2>
+    <div class="caps">
+      <div class="cap">
+        <h4>Live operations</h4>
+        <p>Event calendars, release cadence, A/B testing, retention and monetization strategy, on-call triage systems.</p>
       </div>
-      <div class="skill-group">
-        <h3>Live ops &amp; data</h3>
-        <div class="tag-row">
-          <span class="tag">KPI tracking</span>
-          <span class="tag">A/B testing</span>
-          <span class="tag">Live ops calendars</span>
-          <span class="tag">Retention &amp; monetization strategy</span>
-        </div>
+      <div class="cap">
+        <h4>Production management</h4>
+        <p>Agile and Scrum, sprint planning, RAID logs, milestone and release management, cross-studio publishing.</p>
       </div>
-      <div class="skill-group">
-        <h3>Cross-functional</h3>
-        <div class="tag-row">
-          <span class="tag">Stakeholder management</span>
-          <span class="tag">Vendor / outsourcer management</span>
-          <span class="tag">Localization pipeline</span>
-          <span class="tag">QA coordination</span>
-          <span class="tag">Budget tracking</span>
-        </div>
+      <div class="cap">
+        <h4>Stakeholder alignment</h4>
+        <p>VP-level buy-in, international and partner-studio coordination, executive reporting and dashboards.</p>
+      </div>
+      <div class="cap">
+        <h4>Operations and vendors</h4>
+        <p>Outsourcer management, localization pipelines, QA coordination, budget ownership across functions.</p>
       </div>
     </div>
-    <div class="tools-line"><strong>Tools:</strong> Jira, Confluence, Notion, Miro, Figma, Airtable, Monday.com, custom CMS platforms</div>
+    <div class="tools"><b>Tools</b> — Jira, Confluence, Notion, Miro, Figma, Airtable, Monday.com, custom CMS platforms</div>
   </section>
 
-  <section id="education">
-    <div class="section-head">
-      <h2>Education</h2>
-      <div class="index">04</div>
-    </div>
-    <div class="edu-row">
-      <div>Bachelor of Arts, Political Science</div>
-      <div class="school">San Francisco State University · 2012–2016</div>
+  <section>
+    <h2 class="sec-title">Education</h2>
+    <div class="edu">
+      <div>Bachelor of Arts, Political Science — San Francisco State University</div>
+      <div class="right">2012–2016</div>
     </div>
   </section>
 
-  <footer id="contact">
-    <h2>Let's talk</h2>
-    <p>I'm looking at Senior Producer, live ops leadership, and production-adjacent product roles in mobile and PC games. Reach out directly — happy to walk through any of the above in more depth.</p>
-    <div class="contact-links">
-      <a class="btn primary" href="mailto:ryan@uota.us">ryan@uota.us</a>
-      <a class="btn ghost" href="tel:5302047018">530-204-7018</a>
-      <a class="btn ghost" href="https://www.linkedin.com/in/ryan-uota" target="_blank" rel="noopener">linkedin.com/in/ryan-uota</a>
+  <footer>
+    <h2>Get in touch</h2>
+    <p>I'm looking at senior producer, live operations, and production-adjacent product roles across mobile and PC. Happy to walk through any of the above in more detail.</p>
+    <div class="contact">
+      <a href="mailto:ryan@uota.us">ryan@uota.us</a>
+      <a href="https://www.linkedin.com/in/ryan-uota" target="_blank" rel="noopener">linkedin.com/in/ryan-uota</a>
     </div>
-    <div class="foot-note">Based in Santa Rosa, California.</div>
+    <div class="loc">Santa Rosa, California</div>
   </footer>
 
+</div>
 </body>
 </html>
